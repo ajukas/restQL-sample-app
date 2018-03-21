@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  sample-app:
+    image: node:8-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: ash -c "npm install && node app.js"
+  #RESTQL SERVER 
+  restql-server:
+    image: casaecafe/restql-server:latest
+    environment:
+      - SAMPLE=http://sample-app:3001/:id
+    ports:
+      - '9000:9000'
